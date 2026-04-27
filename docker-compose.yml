@@ -1,0 +1,21 @@
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: oclus_health_waha
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      WAHA_DASHBOARD_USERNAME: admin
+      WAHA_DASHBOARD_PASSWORD: admin123
+      WAHA_API_KEY: krb245ib24on2i12v5i12p5kn14i51o24ib5o24h5ov
+      WHATSAPP_DEFAULT_ENGINE: NOWEB
+    volumes:
+      - ./waha-sessions:/app/sessions
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: oclus_health_api
+    ports:
+      - "2000:2000"

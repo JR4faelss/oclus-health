@@ -1,0 +1,34 @@
+# 🏥 Oclus Health - Unidade de Teste
+
+## 🕒 Horários de Funcionamento
+- Segunda a Sexta: 08:00 às 18:00 (Sem fechar para almoço)
+- Sábado: 08:00 às 12:00
+- Domingo e Feriados: Fechado
+
+## 💰 Tabela de Preços (Particular)
+- Consulta Clínico Geral: R$ 200,00
+- Consulta Especialista (Cardiologia/Dermatologia): R$ 350,00
+- Retorno (dentro de 15 dias): Grátis
+- Exames Laboratoriais Básicos: A partir de R$ 50,00
+
+## 📑 Convênios Aceitos
+- Unimed (Plano Nacional e Regional)
+- Bradesco Saúde (Exceto plano 'Efetivo')
+- SulAmérica
+- Cassi
+- Particular (Dinheiro, PIX e Cartão em até 3x)
+
+## 📍 Localização
+- Endereço: Av. da Saúde, 1000, Sala 501. Bairro Centro.
+- Ponto de referência: Próximo ao Hospital Central.
+
+## 📝 Regras de Agendamento e Cancelamento
+1. O paciente deve chegar com 15 minutos de antecedência.
+2. Cancelamentos devem ser feitos com no mínimo 4 horas de antecedência.
+3. Em caso de falta sem aviso (No-show), será cobrada uma taxa de 20% do valor da consulta no próximo agendamento.
+4. Triagem obrigatória: Todos os novos pacientes passam por uma breve triagem virtual ou presencial antes da primeira consulta.
+
+## 👨‍⚕️ Corpo Clínico
+- Dr. Carlos Oliveira (Clínico Geral)
+- Dra. Ana Souza (Pediatria)
+- Dr. Roberto Costa (Cardiologia)

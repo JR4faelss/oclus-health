@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oclus Health | Luxury Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #050505; color: #d4d4d8; overflow: hidden; }
+        h1, h2, h3 { font-family: 'Cinzel', serif; }
+        
+        .gold-gradient { background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); }
+        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border { border: 1px solid rgba(191, 149, 63, 0.3); }
+        .gold-glow:hover { box-shadow: 0 0 20px rgba(191, 149, 63, 0.15); border-color: rgba(191, 149, 63, 0.6); }
+        
+        .glass { background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.03); }
+        .sidebar-item-active { background: linear-gradient(to right, rgba(191, 149, 63, 0.1), transparent); border-left: 3px solid #bf953f; color: #fcf6ba; }
+        
+        .bg-luxury { 
+            background-image: radial-gradient(at 0% 0%, rgba(61, 43, 31, 0.3) 0, transparent 50%), 
+                              radial-gradient(at 100% 100%, rgba(10, 10, 10, 0.5) 0, transparent 50%); 
+        }
+
+        /* Animações */
+        @keyframes subtle-gold-pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .pulse-gold { animation: subtle-gold-pulse 3s infinite; }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #bf953f; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-luxury min-h-screen">
+
+    <!-- Background Accents -->
+    <div class="fixed top-0 right-0 w-96 h-96 bg-amber-900/10 blur-[150px] rounded-full"></div>
+    <div class="fixed bottom-0 left-0 w-96 h-96 bg-yellow-900/5 blur-[150px] rounded-full"></div>
+
+    <div class="relative z-10 flex flex-col h-screen">
+        <!-- Header: Luxury Bar -->
+        <header class="flex items-center justify-between px-10 py-6 border-b border-white/5 bg-black/40 backdrop-blur-xl">
+            <div class="flex items-center gap-5">
+                <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(191,149,63,0.3)]">
+                    <i class="fas fa-crown text-black text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-[0.1em] text-white">OCLUS <span class="gold-text">HEALTH</span></h1>
+                    <p class="text-[9px] text-amber-500/60 uppercase tracking-[0.4em] font-black">Inteligência Médica Superior</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-8">
+                <div id="status-indicators" class="flex gap-6">
+                    <div id="status-db" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-tighter">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span> DB
+                    </div>
+                    <div id="status-openai" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-tighter">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span> AI
+                    </div>
+                    <div id="status-waha" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-tighter">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span> WA
+                    </div>
+                </div>
+                <div class="h-8 w-px bg-white/5"></div>
+                <div class="flex items-center gap-3">
+                    <input type="password" id="admin-token" placeholder="Security Token" class="bg-black/50 border border-white/10 rounded-lg text-[10px] px-4 py-2 w-40 focus:border-amber-500/50 outline-none transition-all">
+                    <button onclick="saveToken()" class="gold-gradient text-black text-[10px] font-black px-5 py-2 rounded-lg hover:brightness-110 transition-all uppercase tracking-widest">Login</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Sidebar: Navigation -->
+            <aside class="w-72 border-r border-white/5 bg-black/20 flex flex-col py-8 px-4">
+                <nav class="space-y-3 flex-1">
+                    <p class="text-[9px] font-black text-amber-500/40 uppercase tracking-[0.3em] mb-6 px-4">Gestão Clínica</p>
+                    <button onclick="showTab('agenda')" id="tab-agenda" class="w-full flex items-center gap-4 p-4 rounded-xl transition-all hover:bg-white/5 group">
+                        <i class="fas fa-calendar-alt text-amber-500/70 group-hover:text-amber-400"></i>
+                        <span class="text-sm font-semibold tracking-wide">Agenda</span>
+                    </button>
+                    <button onclick="showTab('soap')" id="tab-soap" class="w-full flex items-center gap-4 p-4 rounded-xl transition-all hover:bg-white/5 group">
+                        <i class="fas fa-feather-pointed text-amber-500/70 group-hover:text-amber-400"></i>
+                        <span class="text-sm font-semibold tracking-wide">Prontuários</span>
+                    </button>
+                    <button onclick="showTab('rag')" id="tab-rag" class="w-full flex items-center gap-4 p-4 rounded-xl transition-all hover:bg-white/5 group">
+                        <i class="fas fa-scroll text-amber-500/70 group-hover:text-amber-400"></i>
+                        <span class="text-sm font-semibold tracking-wide">Base de Conhecimento</span>
+                    </button>
+                    <button onclick="showTab('stats')" id="tab-stats" class="w-full flex items-center gap-4 p-4 rounded-xl transition-all hover:bg-white/5 group">
+                        <i class="fas fa-gem text-amber-500/70 group-hover:text-amber-400"></i>
+                        <span class="text-sm font-semibold tracking-wide">Performance</span>
+                    </button>
+                </nav>
+
+                <!-- Premium Date Picker -->
+                <div class="mt-auto p-6 glass rounded-3xl gold-border shadow-2xl">
+                    <label class="text-[9px] font-black text-amber-500 uppercase tracking-widest block mb-4">Selecionar Data</label>
+                    <input type="date" id="calendar-picker" onchange="changeAgendaDate(this.value)" class="w-full bg-black/40 border-none rounded-lg text-xs p-3 text-amber-100 outline-none focus:ring-1 focus:ring-amber-500/50">
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-12 lg:p-16 scrollbar-hide">
+                
+                <!-- Section: Agenda Master -->
+                <section id="content-agenda" class="tab-content">
+                    <div class="flex items-end justify-between mb-16">
+                        <div>
+                            <h2 class="text-5xl font-bold text-white tracking-tighter mb-4">Agenda</h2>
+                            <p class="text-amber-500/50 font-semibold uppercase tracking-widest text-[10px]">Calendário: <span id="current-agenda-date" class="text-amber-200">...</span></p>
+                        </div>
+                        <button onclick="loadAgenda()" class="w-14 h-14 rounded-2xl glass gold-border flex items-center justify-center hover:bg-white/5 transition-all text-amber-500"><i class="fas fa-rotate"></i></button>
+                    </div>
+
+                    <div class="space-y-6" id="agenda-table-body">
+                        <!-- Agenda items -->
+                    </div>
+                </section>
+
+                <!-- Section: SOAP Elite -->
+                <section id="content-soap" class="tab-content hidden">
+                    <h2 class="text-5xl font-bold text-white tracking-tighter mb-16">Histórico <span class="gold-text">Clínico</span></h2>
+                    <div id="soap-list" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+                </section>
+
+                <!-- Section: RAG Knowledge -->
+                <section id="content-rag" class="tab-content hidden">
+                    <div class="max-w-3xl mx-auto text-center mb-16">
+                        <h2 class="text-5xl font-bold text-white tracking-tighter mb-4">Intelligence <span class="gold-text">Center</span></h2>
+                        <p class="text-amber-500/40 uppercase tracking-[0.2em] text-[10px] font-black">Expanda o conhecimento da sua IA</p>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto glass p-16 rounded-[4rem] gold-border relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <form id="upload-form" class="relative z-10 flex flex-col items-center">
+                            <div class="w-24 h-24 bg-amber-500/10 rounded-full flex items-center justify-center mb-8 border border-amber-500/20">
+                                <i class="fas fa-arrow-up-from-bracket text-3xl text-amber-500 group-hover:scale-110 transition-transform"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2 italic">Anexar Documentação</h4>
+                            <p class="text-amber-500/40 text-xs mb-10 tracking-widest uppercase">Padrão: PDF ou TXT (Máx 10MB)</p>
+                            
+                            <div class="relative w-full mb-10">
+                                <input type="file" id="document-file" accept=".pdf,.txt" required class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20">
+                                <div class="p-8 border-2 border-dashed border-amber-500/20 rounded-3xl text-center group-hover:border-amber-500/50 transition-all">
+                                    <span class="text-sm font-medium text-slate-500">Clique para navegar ou arraste os arquivos</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="gold-gradient text-black font-black uppercase tracking-[0.2em] text-[11px] px-16 py-6 rounded-2xl shadow-[0_10px_30px_rgba(191,149,63,0.3)] hover:scale-105 transition-all">Sincronizar Knowledge Base</button>
+                        </form>
+                        <div id="upload-status" class="mt-10 text-center text-[10px] font-black uppercase tracking-[0.3em] hidden"></div>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto mt-20">
+                        <h3 class="text-[10px] font-black text-amber-500/30 uppercase tracking-[0.4em] mb-10 text-center">Registros de Inteligência Ativos</h3>
+                        <div id="rag-documents-list" class="grid grid-cols-1 gap-4"></div>
+                    </div>
+                </section>
+
+                <!-- Section: Stats Analytics -->
+                <section id="content-stats" class="tab-content hidden">
+                    <h2 class="text-5xl font-bold text-white tracking-tighter mb-16 text-center">Analytics <span class="gold-text">Luxury</span></h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <!-- Stat Card 1 -->
+                        <div class="glass p-10 rounded-[3rem] gold-border group hover:bg-amber-500/5 transition-all">
+                            <div class="flex justify-between items-start mb-6">
+                                <p class="text-[9px] font-black text-amber-500 uppercase tracking-widest">NPS Score</p>
+                                <i class="fas fa-award text-amber-500/30 text-2xl"></i>
+                            </div>
+                            <div class="text-7xl font-bold text-white mb-4 italic" id="stat-nps">0</div>
+                            <p class="text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">Performance de Excelência</p>
+                        </div>
+                        <!-- Stat Card 2 -->
+                        <div class="glass p-10 rounded-[3rem] gold-border group hover:bg-amber-500/5 transition-all">
+                            <div class="flex justify-between items-start mb-6">
+                                <p class="text-[9px] font-black text-amber-500 uppercase tracking-widest">Satisfação</p>
+                                <i class="fas fa-star text-amber-500/30 text-2xl"></i>
+                            </div>
+                            <div class="text-7xl font-bold text-white mb-4 italic" id="stat-avg">0.0</div>
+                            <div class="flex gap-1 text-amber-500" id="stat-stars"></div>
+                        </div>
+                        <!-- Stat Card 3 -->
+                        <div class="glass p-10 rounded-[3rem] gold-border group hover:bg-amber-500/5 transition-all">
+                            <div class="flex justify-between items-start mb-6">
+                                <p class="text-[9px] font-black text-amber-500 uppercase tracking-widest">Total Médicos</p>
+                                <i class="fas fa-user-md text-amber-500/30 text-2xl"></i>
+                            </div>
+                            <div class="text-7xl font-bold text-white mb-4 italic" id="stat-total">0</div>
+                            <p class="text-[10px] text-blue-400 font-bold uppercase tracking-tighter">Consultas este ciclo</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Luxury SOAP Modal -->
+    <div id="soap-modal" class="fixed inset-0 bg-black/95 backdrop-blur-3xl hidden flex items-center justify-center p-6 z-[100]">
+        <div class="glass max-w-5xl w-full rounded-[4rem] p-16 gold-border flex flex-col max-h-[90vh] shadow-[0_0_100px_rgba(191,149,63,0.1)]">
+            <div class="flex justify-between items-center mb-12">
+                <h3 class="text-3xl font-bold text-white italic">Ficha Clínica <span class="gold-text">Premium</span></h3>
+                <button onclick="closeModal()" class="w-14 h-14 rounded-full border border-white/10 hover:border-amber-500/50 flex items-center justify-center transition-all text-amber-500"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="modal-content" class="overflow-y-auto pr-8 scrollbar-hide space-y-10"></div>
+            <div class="mt-12 flex justify-end gap-6 pt-8 border-t border-white/5">
+                <button onclick="closeModal()" class="text-[10px] font-black uppercase text-slate-500 hover:text-white transition-all tracking-widest">Fechar</button>
+                <button id="btn-sign-confirm" class="gold-gradient text-black font-black uppercase tracking-[0.2em] text-[10px] px-12 py-5 rounded-2xl shadow-xl shadow-amber-500/20 transition-all">Aplicar Assinatura Digital</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app_v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+venv_linux/
+.env
+
+# Database & Media (Dados Locais)
+chroma_db/
+temp_media/
+waha-sessions/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

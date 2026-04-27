@@ -1,0 +1,25 @@
+=== OCLUS HEALTH - ESCALA DE PROFISSIONAIS E ESPECIALIDADES ===
+
+--- DR. CARLOS (CLÍNICO GERAL) ---
+Especialidade: Medicina Interna
+Horários:
+- Segundas e Quartas: 08:00 às 17:00
+- Sábados: 08:00 às 11:30
+Notas: Dr. Carlos foca em atendimentos preventivos e diagnósticos complexos.
+
+--- DRA. MARIA (DENTISTA) ---
+Especialidade: Ortodontia e Estética
+Horários:
+- Terças e Quintas: 10:00 às 19:00
+- Sextas: 08:00 às 15:00
+Notas: Dra. Maria realiza limpeza odontológica e ajustes de aparelhos.
+
+--- DR. LUCAS (FISIOTERAPEUTA) ---
+Especialidade: Reabilitação Esportiva
+Horários:
+- Segunda a Sexta: 13:00 às 18:00
+Notas: Dr. Lucas só atende pacientes acima de 12 anos.
+
+--- REGRAS PARA PRIMEIRO AGENDAMENTO ---
+Novos pacientes devem reservar 60 minutos para a primeira consulta com qualquer profissional para preenchimento de ficha médica e anamnese completa.
+Pacientes que já possuem cadastro agendam apenas slots de 30 minutos.
